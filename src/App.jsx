@@ -4,14 +4,11 @@ import dates from './dates.json'; // Import dates JSON
 import colors from './colors.json'; // Import colors JSON
 
 const App = () => {
-  const [blocks, setBlocks] = useState([]);
   const [timeLinePosition, setTimeLinePosition] = useState(0);
   const [currentTime, setCurrentTime] = useState('');
-
-  
-  const blocksUS = [
+  const [blocksUS, setBlocksUS] = useState([
     { className: 'advisory', color: 'none'},
-    { className: 'p1', color: 'blue'},
+    { className: 'p1', color: 'blue'}, // Initial data, will be replaced
     { className: 'break', color: 'none'},
     { className: 'p2', color: 'red'},
     { className: 'flex', color: 'none'},
@@ -21,11 +18,10 @@ const App = () => {
     { className: 'p4', color: 'red'},
     { className: 'break', color: 'none'},
     { className: 'p5', color: 'orange'}
-    ]
-
-  const blocksMS = [
+  ]);
+  const [blocksMS, setBlocksMS] = useState([
     { className: 'advisory', color: 'none'},
-    { className: 'p1', color: 'blue'},
+    { className: 'p1', color: 'blue'}, // Initial data, will be replaced
     { className: 'break', color: 'none'},
     { className: 'p2', color: 'red'},
     { className: 'break', color: 'none'},
@@ -40,7 +36,7 @@ const App = () => {
     { className: 'break', color: 'none'},
     { className: 'p6', color: 'tan'},
     { className: 'sports', color: 'none'}
-    ]
+  ]);
 
   // Utility function to get today's date as a string
   const getTodayDate = () => {
@@ -64,39 +60,59 @@ const App = () => {
     }
   };
 
-  // const setScheduleBlocks = () => {
-  //   const todayDate = getTodayDate();
-  //   const todaySchedule = dates.DateScheduleWeek.find(entry => entry.date === todayDate);
-  //   if (todaySchedule) {
-  //     const todayDay = todaySchedule.day;
-  //     const todayType = todaySchedule.Type;
-  //     const schedule = colors.SchoolWeek.find(day => day.Day === todayDay && day.Type === todayType);
-  //     if (schedule) {
-  //       const updateColors = (templateBlocks) => {
-  //         return templateBlocks.map(block => {
-  //           const entry = schedule.Schedule.find(scheduleEntry => scheduleEntry.Period === block.className);
-  //           if (entry) {
-  //             return { ...block, color: getColorFromCode(entry.Class) };
-  //           }
-  //           return block;
-  //         });
-  //       };
-  //       if (todayType === 'US') {
-  //         setBlocksUS(updateColors(templateBlocksUS));
-  //       } else if (todayType === 'MS') {
-  //         setBlocksMS(updateColors(templateBlocksMS));
-  //       }
-  //     }
-  //   }
-  // };
+  const setScheduleBlocks = () => {
+    const todayDate = getTodayDate();
+    const todaySchedule = dates.DateScheduleWeek.find(entry => entry.date === todayDate);
+    if (todaySchedule) {
+      const todayDay = todaySchedule.day;
+      
+      // Update US blocks
+      const USschedule = colors.SchoolWeek.find(day => day.Day === todayDay && day.Type === "US");
+      if (USschedule) {
+        setBlocksUS(prevBlocks => 
+          prevBlocks.map(block => {
+            const entry = USschedule.Schedule.find(scheduleEntry => scheduleEntry.Period === block.className);
+            if (entry) {
+              return { ...block, color: getColorFromCode(entry.Class) };
+            }
+            return block;
+          })
+        );
+      } else {
+        console.log(`No US schedule found for day: ${todayDay}`);
+      }
+      
+      // Update MS blocks
+      const MSschedule = colors.SchoolWeek.find(day => day.Day === todayDay && day.Type === "MS");
+      if (MSschedule) {
+        setBlocksMS(prevBlocks => 
+          prevBlocks.map(block => {
+            const entry = MSschedule.Schedule.find(scheduleEntry => scheduleEntry.Period === block.className);
+            if (entry) {
+              return { ...block, color: getColorFromCode(entry.Class) };
+            }
+            return block;
+          })
+        );
+      } else {
+        console.log(`No MS schedule found for day: ${todayDay}`);
+      }
+    } else {
+      console.log(`No schedule found for date: ${todayDate}`);
+    }
+  };
+
+  useEffect(() => {
+    setScheduleBlocks();
+  }, []);
 
   useEffect(() => {
     const updateLinePosition = () => {
       const now = new Date();
       const start = new Date();
-      start.setHours(8, 0, 0, 0); // 5:00 AM
+      start.setHours(8, 0, 0, 0); // Start time
       const end = new Date();
-      end.setHours(15, 20, 0, 0); // 3:20 PM
+      end.setHours(15, 20, 0, 0); // End time
 
       if (now < start || now > end) {
         setTimeLinePosition(-1); // A value to hide the line
@@ -139,7 +155,6 @@ const App = () => {
         </div>
       )}
       <div className="UpperSchool">
-
         {blocksUS.map((block, index) => (
           <div
             key={index}
@@ -157,7 +172,6 @@ const App = () => {
             key={index}
             className={block.className}
             color-block={block.color}
-
           ></div>
         ))}
       </div>
