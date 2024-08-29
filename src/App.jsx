@@ -11,7 +11,7 @@ const App = () => {
   const [currentTime, setCurrentTime] = useState('');
 
   
-  const templateBlocksUS = [
+  const blocksUS = [
     { className: 'advisory', color: 'none'},
     { className: 'p1', color: 'blue'},
     { className: 'break', color: 'none'},
@@ -25,7 +25,7 @@ const App = () => {
     { className: 'p5', color: 'orange'}
     ]
 
-  const templateBlocksMS = [
+  const blocksMS = [
     { className: 'advisory', color: 'none'},
     { className: 'p1', color: 'blue'},
     { className: 'break', color: 'none'},
@@ -92,26 +92,7 @@ const App = () => {
     }
   };
 
-
-
-  const handleColorBlockClick = (event, color, background) => {
-    const rect = event.target.getBoundingClientRect();
-    const containerRect = event.target.parentElement.getBoundingClientRect();
-    const topPercent = ((rect.top - containerRect.top) / containerRect.height) * 100;
-    const heightPercent = (rect.height / containerRect.height) * 100;
-
-    // Debugging information
-    console.log("Clicked Block Rect:", rect);
-    console.log("Container Rect:", containerRect);
-    console.log("Top Percent:", topPercent);
-    console.log("Height Percent:", heightPercent);
-    
-    setBlocks([...blocks, { color, background, topPercent, heightPercent, text: '' }]);
-  };
-
-
   useEffect(() => {
-    setScheduleBlocks();
     const updateLinePosition = () => {
       const now = new Date();
       const start = new Date();
@@ -166,7 +147,6 @@ const App = () => {
             key={index}
             className={block.className}
             color-block={block.color}
-            onClick={(event) => handleColorBlockClick(event, block.color, block.background)}
           ></div>
         ))}
       </div>
