@@ -1,0 +1,265 @@
+main {
+
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 700px;
+  display: grid;
+  grid-template-columns: 0.3fr 2.4fr 0.3fr;
+  grid-template-rows: 1fr 10fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    "Title Title Title"
+    "Left center Right";
+  position: relative
+}
+
+.UpperSchool {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5fr 65fr 5fr 65fr 25fr 5fr 65fr 50fr 80fr 5fr 65fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-area: Left;
+  position: relative;
+}
+
+.Title {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: ".";
+  grid-area: Title;
+}
+
+.MiddleSchool {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10fr 45fr 5fr 45fr 5fr 25fr 5fr 45fr 45fr 5fr 45fr 5fr 45fr 5fr 45fr 60fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-area: Right;
+  position: relative;
+}
+
+html,
+body,
+.container {
+  height: 700px;
+  width: 200px;
+  margin: 7px;
+}
+
+/* For presentation only, no need to copy the code below */
+
+.container * {
+  border: 1px solid black;
+  position: relative;
+}
+
+.container *:after {
+  /*content:attr(class);*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.break, .flex, .lunch, .sports, .advisory {
+  background-color: black;
+}
+
+[color-block="red"] {
+  background: repeating-linear-gradient(
+    45deg,
+    /* 45-degree angle */ #ff0000,
+    /* Red color */ #ff0000 3px,
+    /* Red stripe thickness */ #ff6666 6px,
+    /* Light red color */ #ff6666 6px /* Light red stripe thickness */
+  );
+}
+
+/* Blue stripes - 45 degrees */
+[color-block="blue"] {
+
+  background: repeating-linear-gradient(
+    135deg,
+    /* 45-degree angle */ #0000ff,
+    /* Purple color */ #0000ff 3px,
+    /* Purple stripe thickness */ #6666f9 6px,
+    /* Light purple color */ #6666f9 6px /* Light purple stripe thickness */
+  );
+}
+
+/* Tan stripes - 135 degrees (diagonal opposite) */
+[color-block="tan"] {
+
+  background: repeating-linear-gradient(
+    135deg,
+    /* 135-degree angle */ #d2b48c,
+    /* Tan color */ #d2b48c 3px,
+    /* Tan stripe thickness */ #f5deb3 6px,
+    /* Light tan color */ #f5deb3 6px /* Light tan stripe thickness */
+  );
+}
+
+/* Pink stripes - horizontal */
+[color-block="pink"] {
+
+  background: repeating-linear-gradient(
+    45deg,
+    /* Horizontal stripes */ #ff69b4,
+    /* Pink color */ #ff69b4 3px,
+    /* Pink stripe thickness */ #ffb6c1 6px,
+    /* Light pink color */ #ffb6c1 6px /* Light pink stripe thickness */
+  );
+}
+
+[color-block="orange"] {
+
+  background: repeating-linear-gradient(
+    45deg,
+    /* Horizontal stripes */ orange,
+    /* Pink color */ orange 3px,
+    /* Pink stripe thickness */ #fbbe4b 6px,
+    /* Light pink color */ #fbbe4b 6px /* Light pink stripe thickness */
+  );
+}
+
+/* Yellow stripes - 135 degrees */
+[color-block="yellow"] {
+  background: repeating-linear-gradient(
+    135deg,
+    /* Horizontal stripes */ #ffff0a,
+    /* Pink color */ #ffff0a 3px,
+    /* Pink stripe thickness */ #f9f958 6px,
+    /* Light pink color */ #f9f958 6px /* Light pink stripe thickness */
+);}
+
+/* Green stripes - horizontal */
+[color-block="green"] {
+
+  background: repeating-linear-gradient(
+    135deg,
+    /* Horizontal stripes */ #008000,
+    /* Green color */ #008000 3px,
+    /* Green stripe thickness */ #03aa03 6px,
+    /* Light green color */ #03aa03 6px /* Light green stripe thickness */
+  );
+}
+
+/* Purple stripes - 45 degrees */
+[color-block="purple"] {
+
+  background: repeating-linear-gradient(
+    45deg,
+    /* 45-degree angle */ #800080,
+    /* Purple color */ #800080 3px,
+    /* Purple stripe thickness */ #ad01ad 6px,
+    /* Light purple color */ #ad01ad 6px /* Light purple stripe thickness */
+  );
+}
+
+.lunch {
+  background: repeating-linear-gradient(
+    45deg,
+    /* 45-degree angle */ white,
+    /* Purple color */ white 3px,
+    /* Purple stripe thickness */ grey 6px,
+    /* Light purple color */ grey 6px /* Light purple stripe thickness */
+  );
+}
+
+.line {
+  width: 900%;
+  height: 0.01px;
+  background-color: black;
+  bottom: -1px;
+  position: absolute;
+}
+
+.time-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+}
+
+.container {
+  position: relative; /* Necessary to position the time line correctly */
+}
+
+/* Time line indicator */
+.time-line {
+  position: absolute;
+  width: 90%;
+  height: 1px;
+  background-color: red;
+}
+
+/* Time display on the timeline */
+.time-display {
+  position: absolute;
+  top: -10px; /* Adjust this value to place the time exactly in the middle of the time line */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 0px solid black;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Tooltip styling */
+.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  pointer-events: none; /* Ensures the tooltip doesn't interfere with mouse events */
+  z-index: 10;
+  display: none; /* Hide tooltip by default */
+}
+
+.tooltip .visible {
+  display: block; /* Show tooltip when active */
+}
+
+.editable-box {
+  border: 1px solid #000;
+  width: 90%;
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  resize: none;
+  min-height: 50px;
+}
+
+.center-column {
+  grid-area: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 0px solid #ccc;
+  position: relative;
+}

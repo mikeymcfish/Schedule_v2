@@ -1,0 +1,109 @@
+{
+  "DateScheduleWeek": [
+    {
+      "date": "2024-08-29",
+      "day": "B",
+      "color": "Gold"
+    },
+    {
+      "date": "2024-08-30",
+      "day": "C",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-08-31",
+      "day": "D",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-01",
+      "day": "E",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-02",
+      "day": "F",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-03",
+      "day": "G",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-04",
+      "day": "H",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-05",
+      "day": "A",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-06",
+      "day": "B",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-07",
+      "day": "C",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-08",
+      "day": "D",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-09",
+      "day": "E",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-10",
+      "day": "F",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-11",
+      "day": "G",
+      "color": "Navy"
+    },
+    {
+      "date": "2024-09-12",
+      "day": "H",
+      "color": "Gold"
+    },
+    {
+      "date": "2024-09-13",
+      "day": "A",
+      "color": "Gold"
+    },
+    {
+      "date": "2024-09-14",
+      "day": "B",
+      "color": "Gold"
+    },
+    {
+      "date": "2024-09-15",
+      "day": "C",
+      "color": "Gold"
+    },
+    {
+      "date": "2024-09-16",
+      "day": "D",
+      "color": "Gold"
+    },
+    {
+      "date": "2024-09-17",
+      "day": "E",
+      "color": "Gold"
+    },
+    {
+      "date": "2024-09-18",
+      "day": "F",
+      "color": "Gold"
+    }
+  ]
+}
