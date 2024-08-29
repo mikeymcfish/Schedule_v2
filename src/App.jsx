@@ -5,8 +5,6 @@ import colors from './colors.json'; // Import colors JSON
 
 const App = () => {
   const [blocks, setBlocks] = useState([]);
-  const [blocksUS, setBlocksUS] = useState([]);
-  const [blocksMS, setBlocksMS] = useState([]);
   const [timeLinePosition, setTimeLinePosition] = useState(0);
   const [currentTime, setCurrentTime] = useState('');
 
@@ -66,31 +64,31 @@ const App = () => {
     }
   };
 
-  const setScheduleBlocks = () => {
-    const todayDate = getTodayDate();
-    const todaySchedule = dates.DateScheduleWeek.find(entry => entry.date === todayDate);
-    if (todaySchedule) {
-      const todayDay = todaySchedule.day;
-      const todayType = todaySchedule.Type;
-      const schedule = colors.SchoolWeek.find(day => day.Day === todayDay && day.Type === todayType);
-      if (schedule) {
-        const updateColors = (templateBlocks) => {
-          return templateBlocks.map(block => {
-            const entry = schedule.Schedule.find(scheduleEntry => scheduleEntry.Period === block.className);
-            if (entry) {
-              return { ...block, color: getColorFromCode(entry.Class) };
-            }
-            return block;
-          });
-        };
-        if (todayType === 'US') {
-          setBlocksUS(updateColors(templateBlocksUS));
-        } else if (todayType === 'MS') {
-          setBlocksMS(updateColors(templateBlocksMS));
-        }
-      }
-    }
-  };
+  // const setScheduleBlocks = () => {
+  //   const todayDate = getTodayDate();
+  //   const todaySchedule = dates.DateScheduleWeek.find(entry => entry.date === todayDate);
+  //   if (todaySchedule) {
+  //     const todayDay = todaySchedule.day;
+  //     const todayType = todaySchedule.Type;
+  //     const schedule = colors.SchoolWeek.find(day => day.Day === todayDay && day.Type === todayType);
+  //     if (schedule) {
+  //       const updateColors = (templateBlocks) => {
+  //         return templateBlocks.map(block => {
+  //           const entry = schedule.Schedule.find(scheduleEntry => scheduleEntry.Period === block.className);
+  //           if (entry) {
+  //             return { ...block, color: getColorFromCode(entry.Class) };
+  //           }
+  //           return block;
+  //         });
+  //       };
+  //       if (todayType === 'US') {
+  //         setBlocksUS(updateColors(templateBlocksUS));
+  //       } else if (todayType === 'MS') {
+  //         setBlocksMS(updateColors(templateBlocksMS));
+  //       }
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     const updateLinePosition = () => {
@@ -142,7 +140,7 @@ const App = () => {
       )}
       <div className="UpperSchool">
 
-        {colorBlocksUS.map((block, index) => (
+        {blocksUS.map((block, index) => (
           <div
             key={index}
             className={block.className}
@@ -154,7 +152,7 @@ const App = () => {
       <div className="center-column">
       </div>
       <div className="MiddleSchool">
-        {colorBlocksMS.map((block, index) => (
+        {blocksMS.map((block, index) => (
           <div
             key={index}
             className={block.className}
