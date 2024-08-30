@@ -246,6 +246,71 @@
         {"Period": "p5", "Class": "G"},
         {"Period": "p6", "Class": "B"}
       ]
+    },
+    {
+      "Day": "D",
+      "Color": "Gold",
+      "Type": "MS",
+      "Schedule": [
+        {"Period": "p1", "Class": "T"},
+        {"Period": "p2", "Class": "V"},
+        {"Period": "p3", "Class": "P"},
+        {"Period": "p4", "Class": "B"},
+        {"Period": "p5", "Class": "R"},
+        {"Period": "p6", "Class": "Y"}
+      ]
+    },
+    {
+      "Day": "E",
+      "Color": "Gold",
+      "Type": "MS",
+      "Schedule": [
+        {"Period": "p1", "Class": "O"},
+        {"Period": "p2", "Class": "G"},
+        {"Period": "p3", "Class": "B"},
+        {"Period": "p4", "Class": "Y"},
+        {"Period": "p5", "Class": "T"},
+        {"Period": "p6", "Class": "V"}
+      ]
+    },
+    {
+      "Day": "F",
+      "Color": "Gold",
+      "Type": "MS",
+      "Schedule": [
+        {"Period": "p1", "Class": "P"},
+        {"Period": "p2", "Class": "R"},
+        {"Period": "p3", "Class": "Y"},
+        {"Period": "p4", "Class": "V"},
+        {"Period": "p5", "Class": "T"},
+        {"Period": "p6", "Class": "G"}
+      ]
+    },
+    {
+      "Day": "G",
+      "Color": "Gold",
+      "Type": "MS",
+      "Schedule": [
+        {"Period": "p1", "Class": "B"},
+        {"Period": "p2", "Class": "T"},
+        {"Period": "p3", "Class": "V"},
+        {"Period": "p4", "Class": "G"},
+        {"Period": "p5", "Class": "P"},
+        {"Period": "p6", "Class": "R"}
+      ]
+    },
+    {
+      "Day": "H",
+      "Color": "Gold",
+      "Type": "MS",
+      "Schedule": [
+        {"Period": "p1", "Class": "Y"},
+        {"Period": "p2", "Class": "O"},
+        {"Period": "p3", "Class": "G"},
+        {"Period": "p4", "Class": "R"},
+        {"Period": "p5", "Class": "B"},
+        {"Period": "p6", "Class": "T"}
+      ]
     }
   ]
 }

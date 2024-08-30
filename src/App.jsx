@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import dates from './dates.json'; // Import dates JSON
 import colors from './colors.json'; // Import colors JSON
+import './App.css'; // Import your CSS file
 
 const App = () => {
   const [timeLinePosition, setTimeLinePosition] = useState(0);
   const [currentTime, setCurrentTime] = useState('');
+  const [letterDay, setLetterDay] = useState('');
+  const [dayOfWeek, setDayOfWeek] = useState('');
+  const [fullDate, setFullDate] = useState('');
   const [blocksUS, setBlocksUS] = useState([
     { className: 'advisory', color: 'none'},
     { className: 'p1', color: 'blue'}, // Initial data, will be replaced
@@ -38,13 +41,11 @@ const App = () => {
     { className: 'sports', color: 'none'}
   ]);
 
-  // Utility function to get today's date as a string
   const getTodayDate = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
   };
 
-  // Utility function to map class codes to color names
   const getColorFromCode = (code) => {
     const firstLetter = code.charAt(0).toLowerCase();
     switch(firstLetter) {
@@ -60,13 +61,25 @@ const App = () => {
     }
   };
 
+  const getDayOfWeek = (date) => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return days[date.getDay()];
+  };
+
+  const getFullDate = (date) => {
+    return date.toLocaleDateString();
+  };
+
   const setScheduleBlocks = () => {
     const todayDate = getTodayDate();
+    const today = new Date();
     const todaySchedule = dates.DateScheduleWeek.find(entry => entry.date === todayDate);
     if (todaySchedule) {
       const todayDay = todaySchedule.day;
-      
-      // Update US blocks
+      setLetterDay(todayDay);
+      setDayOfWeek(getDayOfWeek(today));
+      setFullDate(getFullDate(today));
+
       const USschedule = colors.SchoolWeek.find(day => day.Day === todayDay && day.Type === "US");
       if (USschedule) {
         setBlocksUS(prevBlocks => 
@@ -81,8 +94,7 @@ const App = () => {
       } else {
         console.log(`No US schedule found for day: ${todayDay}`);
       }
-      
-      // Update MS blocks
+
       const MSschedule = colors.SchoolWeek.find(day => day.Day === todayDay && day.Type === "MS");
       if (MSschedule) {
         setBlocksMS(prevBlocks => 
@@ -163,7 +175,11 @@ const App = () => {
           ></div>
         ))}
       </div>
-      <div className="Title">day goes here</div>
+      <div id="title" className="Title">
+        <div className="column letterDay">{letterDay}</div>
+        <div className="column dayOfWeek">{dayOfWeek}</div>
+        <div className="column fullDate">{fullDate}</div>
+      </div>
       <div className="center-column">
       </div>
       <div className="MiddleSchool">
@@ -172,7 +188,9 @@ const App = () => {
             key={index}
             className={block.className}
             color-block={block.color}
-          ></div>
+          >
+            <div className='bottom-line-left'></div>
+          </div>
         ))}
       </div>
     </div>

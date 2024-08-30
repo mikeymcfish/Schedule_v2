@@ -101,6 +101,29 @@ body,
     /* Purple stripe thickness */ #6666f9 6px,
     /* Light purple color */ #6666f9 6px /* Light purple stripe thickness */
   );
+  
+
+/* Extend line along the bottom edge, across the page */
+}
+
+.bottom-line-left {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80vw; /* Extend across the whole viewport width */
+  height: 1px;  /* Adjust the height as needed */
+  background-color: black; /* Adjust the color as needed */
+  z-index: 9999; /* Ensure it appears on top of other elements */
+}
+
+.bottom-line-left {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80vw; /* Extend across the whole viewport width */
+  height: 1px;  /* Adjust the height as needed */
+  background-color: black; /* Adjust the color as needed */
+  z-index: 9999; /* Ensure it appears on top of other elements */
 }
 
 /* Tan stripes - 135 degrees (diagonal opposite) */
@@ -240,6 +263,42 @@ body,
 
 .tooltip .visible {
   display: block; /* Show tooltip when active */
+}
+
+.Title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: none;
+  justify-content: flex-end;
+}
+
+.letterDay {
+  flex: 2fr;
+  font-size: 40px;
+  line-height: 40px;
+  background-color: black;
+  color: white;
+}
+
+.dayOfWeek {
+  flex: 3fr;
+  font-size: 20px;
+}
+
+.fullDate {
+  flex: 3fr;
+  
 }
 
 .editable-box {
