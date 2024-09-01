@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import dates from "./dates.json";
+import dates from "./dates-v2.json";
 import colors from "./colors.json";
 
 const DaySchedule = ({ date }) => {
@@ -11,8 +11,9 @@ const DaySchedule = ({ date }) => {
   const [letterDay, setLetterDay] = useState("");
   const [fullDate, setFullDate] = useState("");
   const [weekColor, setWeekColor] = useState("");
+  const [isNoSchool, setIsNoSchool] = useState(false);
   const [blocksUS, setBlocksUS] = useState([
-  { className: "advisory", color: "none" },
+    { className: "advisory", color: "none" },
     { className: "p1", color: "blue" },
     { className: "break", color: "none" },
     { className: "p2", color: "red" },
@@ -41,8 +42,8 @@ const DaySchedule = ({ date }) => {
     { className: "break", color: "none" },
     { className: "p6", color: "tan" },
     { className: "sports", color: "none" },
-    ]);
-  
+  ]);
+
   useEffect(() => {
     const centerColumn = document.querySelector(".center-column");
 
@@ -57,7 +58,7 @@ const DaySchedule = ({ date }) => {
     const handleMouseLeave = () => setShowTimeLine(false);
 
     const updateTime = (y, height) => {
-    const startTime = new Date();
+      const startTime = new Date();
       startTime.setHours(8, 0, 0, 0);
       const endTime = new Date();
       endTime.setHours(15, 30, 0, 0);
@@ -117,68 +118,76 @@ const DaySchedule = ({ date }) => {
   };
 
   const getFullDate = (date) => {
-    return date.toLocaleDateString("en-US", {
+    const formattedDate = date.toLocaleDateString("en-US", {
       weekday: "long",
       month: "short",
       day: "numeric",
     });
+    return formattedDate;
   };
 
   const setScheduleBlocks = () => {
+    const formattedDate = new Date(date + "T00:00:00")
+      .toISOString()
+      .split("T")[0];
     const todaySchedule = dates.DateScheduleWeek.find(
-      (entry) => entry.date === date
+      (entry) => entry.date === formattedDate,
     );
-    
-
     if (todaySchedule) {
       const todayDay = todaySchedule.day;
-      
-      if (todaySchedule.Note && todaySchedule.Note.toLowerCase() === "no school") {
-        setBlocksUS([]);
-        setBlocksMS([]);
-        return;
-      }
       setLetterDay(todayDay);
-      setFullDate(getFullDate(new Date(date)));
-
-      // Set US schedule
-      const USschedule = colors.SchoolWeek.find(
-        (day) =>
-          day.Day === todayDay &&
-          day.Type === "US" &&
-          day.Color == todaySchedule.color
-      );
-
-      if (USschedule) {
-        setWeekColor(USschedule.Color);
-        setBlocksUS((prevBlocks) =>
-          prevBlocks.map((block) => {
-            const entry = USschedule.Schedule.find(
-              (scheduleEntry) => scheduleEntry.Period === block.className
-            );
-            if (entry) {
-              return { ...block, color: getColorFromCode(entry.Class) };
-            }
-            return block;
-          })
+      setFullDate(getFullDate(new Date(todaySchedule.date + "T00:00:00")));
+      setIsNoSchool(todaySchedule.note.toLowerCase() === "no school");
+      // Only set the schedules if it's not a "no school" day
+      if (!isNoSchool) {
+        // Set US schedule
+        const USschedule = colors.SchoolWeek.find(
+          (day) =>
+            day.Day === todayDay &&
+            day.Type === "US" &&
+            day.Color == todaySchedule.color,
         );
-      }
 
-      // Set MS schedule
-      const MSschedule = colors.SchoolWeek.find(
-        (day) => day.Day === todayDay && day.Type === "MS"
-      );
-      if (MSschedule) {
+        if (USschedule) {
+          setWeekColor(USschedule.Color);
+          setBlocksUS((prevBlocks) =>
+            prevBlocks.map((block) => {
+              const entry = USschedule.Schedule.find(
+                (scheduleEntry) => scheduleEntry.Period === block.className,
+              );
+              if (entry) {
+                return { ...block, color: getColorFromCode(entry.Class) };
+              }
+              return block;
+            }),
+          );
+        }
+
+        // Set MS schedule
+        const MSschedule = colors.SchoolWeek.find(
+          (day) => day.Day === todayDay && day.Type === "MS",
+        );
+        if (MSschedule) {
+          setBlocksMS((prevBlocks) =>
+            prevBlocks.map((block) => {
+              const entry = MSschedule.Schedule.find(
+                (scheduleEntry) => scheduleEntry.Period === block.className,
+              );
+              if (entry) {
+                return { ...block, color: getColorFromCode(entry.Class) };
+              }
+              return block;
+            }),
+          );
+        }
+      }
+      else {
+        setWeekColor("none");
+        setBlocksUS((prevBlocks) =>
+          prevBlocks.map((block) => ({ ...block, color: "none" })),
+        );
         setBlocksMS((prevBlocks) =>
-          prevBlocks.map((block) => {
-            const entry = MSschedule.Schedule.find(
-              (scheduleEntry) => scheduleEntry.Period === block.className
-            );
-            if (entry) {
-              return { ...block, color: getColorFromCode(entry.Class) };
-            }
-            return block;
-          })
+          prevBlocks.map((block) => ({ ...block, color: "none" })),
         );
       }
     }
@@ -219,7 +228,6 @@ const DaySchedule = ({ date }) => {
       return `${hours}:${minutes} ${ampm}`;
     };
 
-
     updateLinePosition();
     const interval = setInterval(updateLinePosition, 60000);
 
@@ -234,7 +242,7 @@ const DaySchedule = ({ date }) => {
         </div>
       )}
       <div className="UpperSchool">
-        {blocksUS.map((block, index) => (
+        {!isNoSchool && blocksUS.map((block, index) => (
           <div
             key={index}
             className={block.className}
@@ -242,13 +250,21 @@ const DaySchedule = ({ date }) => {
           ></div>
         ))}
       </div>
-      <div id="title" 
-        className={`Title ${
-          weekColor == "Navy" ? "navy-background" : "gold-background"
-        }`}>
-          <span className="letterDay">{letterDay}</span><span className="fullDate">{fullDate}</span>
-      </div>
+      {isNoSchool ? (
+        <div id="title" className="Title gray-background">
+          No School
+        </div>
+      ) : (
+        <div
+          id="title"
+          className={`Title ${weekColor == "Navy" ? "navy-background" : "gold-background"}`}
+        >
+          <span className="letterDay">{letterDay}</span>
+          <span className="fullDate">{fullDate}</span>
+        </div>
+      )}
       <div className="center-column">
+        
         <div
           className="dynamic-time-line"
           style={{ display: showTimeLine ? "block" : "none", top: mouseY }}
@@ -256,14 +272,10 @@ const DaySchedule = ({ date }) => {
           <span className="time-display">{timeLineTime}</span>
         </div>
 
-        <div className="grid-lines">
-          {Array.from({ length: 30 }, (_, index) => (
-            <div key={index} className="grid-line"></div>
-          ))}
-        </div>
+         <div className="grid-lines"></div>
       </div>
       <div className="MiddleSchool">
-        {blocksMS.map((block, index) => (
+        {!isNoSchool && blocksMS.map((block, index) => (
           <div
             key={index}
             className={block.className}

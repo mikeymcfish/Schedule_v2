@@ -3,14 +3,13 @@ import DaySchedule from "./DaySchedule.jsx";
 import "./App.css";
 
 const App = () => {
-  // You can define an array of dates you want to display
   const datesToDisplay = [];
-  const date = new Date();
-  for (let i = 0; datesToDisplay.length < 9; i++) {
-    const tempDate = new Date(date);
-    tempDate.setDate(date.getDate() + i);
+  const startDate = new Date('2024-09-02T00:00:00');
+  for (let i = 0; datesToDisplay.length < 27; i++) {
+    const tempDate = new Date(startDate);
+    tempDate.setDate(startDate.getDate() + i);
     const day = tempDate.getDay();
-    if (day !== 0 && day !== 1) {
+    if (day !== 0 && day !== 6) { // skip saturday (6) and sunday (0)
       datesToDisplay.push(tempDate.toISOString().split('T')[0]);
     }
   }

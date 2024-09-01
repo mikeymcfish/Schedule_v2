@@ -1,6 +1,12 @@
 {
   "DateScheduleWeek": [
     {
+      "date": "2024-09-01",
+      "day": "B",
+      "color": "Gold",
+      "note": "no school"
+    },
+    {
       "date": "2024-09-02",
       "day": "",
       "color": "",
