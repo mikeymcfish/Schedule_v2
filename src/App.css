@@ -85,7 +85,7 @@ html, body, .container {
     45deg,
     #ff0000,
     #ff0000 3px,
-    #ff6666 6px,
+    #ff6666 1px,
     #ff6666 6px
   );
 }
@@ -95,7 +95,7 @@ html, body, .container {
     135deg,
     #0000ff,
     #0000ff 3px,
-    #6666f9 6px,
+    #6666f9 1px,
     #6666f9 6px
   );
 }
@@ -115,7 +115,7 @@ html, body, .container {
     135deg,
     #d2b48c,
     #d2b48c 3px,
-    #f5deb3 6px,
+    #f5deb3 1px,
     #f5deb3 6px
   );
 }
@@ -125,7 +125,7 @@ html, body, .container {
     45deg,
     #ff69b4,
     #ff69b4 3px,
-    #ffb6c1 6px,
+    #ffb6c1 1px,
     #ffb6c1 6px
   );
 }
@@ -135,7 +135,7 @@ html, body, .container {
     45deg,
     orange,
     orange 3px,
-    #fbca6f 6px,
+    #fbca6f 1px,
     #fbca6f 6px
   );
 }
@@ -145,7 +145,7 @@ html, body, .container {
     135deg,
     #ffff0a,
     #ffff0a 3px,
-    #f9f958 6px,
+    #f9f958 1px,
     #f9f958 6px
   );
 }
@@ -155,7 +155,7 @@ html, body, .container {
     135deg,
     #008000,
     #008000 3px,
-    #03aa03 6px,
+    #03aa03 1px,
     #03aa03 6px
   );
 }
@@ -165,7 +165,7 @@ html, body, .container {
     45deg,
     #800080,
     #800080 3px,
-    #ad01ad 6px,
+    #ad01ad 1px,
     #ad01ad 6px
   );
 }
@@ -175,8 +175,8 @@ html, body, .container {
     45deg,
     white,
     white 3px,
-    grey 6px,
-    grey 6px
+    #d6d6d6 1px,
+    #d6d6d6 6px
   );
 }
 
@@ -383,8 +383,33 @@ html, body, .container {
     #a0a0a0 calc(6 * (100% / 88) - 1px),
     #a0a0a0 calc(6 * (100% / 88)),
     transparent calc(6 * (100% / 88))
+
   );
   pointer-events: none;
+}
+
+.lines-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  top: -1px;
+  margin: 0;
+}
+
+.lines {
+  min-height: 0px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.lines:nth-of-type(6n+1) {
+  border-bottom: 1px solid #b8b8b8;
+}
+
+.lines:nth-of-type(12n+1) {
+  border-bottom: 1px solid #1a1a1a;
 }
 
 @media (max-width: 768px) {

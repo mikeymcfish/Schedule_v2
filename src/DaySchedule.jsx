@@ -271,8 +271,12 @@ const DaySchedule = ({ date }) => {
         >
           <span className="time-display">{timeLineTime}</span>
         </div>
-
-         <div className="grid-lines"></div>
+        <div className="lines-container">
+          {Array.from(Array(88).keys()).map((i) => (
+            <div key={i} className="lines"></div>
+          ))}
+           {/* <div className="grid-lines"></div> */}
+        </div>
       </div>
       <div className="MiddleSchool">
         {!isNoSchool && blocksMS.map((block, index) => (
