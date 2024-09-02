@@ -14,10 +14,31 @@ const App = () => {
       datesToDisplay.push(tempDate.toISOString().split('T')[0]);
     }
   }
+  
+  // Group dates into sets of 3
+  const groupedDates = [];
+  for (let i = 0; i < datesToDisplay.length; i += 3) {
+    groupedDates.push(datesToDisplay.slice(i, i + 3));
+  }
+
   return (
     <div className="app-container">
-      {datesToDisplay.map((date) => (
-        <DaySchedule key={date} date={date} />
+      {groupedDates.map((group, index) => (
+        <div key={index} className="schedule-group">
+          <div className="schedules">
+            {group.map((date) => (
+              <DaySchedule key={date} date={date} />
+            ))}
+          </div>
+          <div className="notes-section">
+            <div className="lines-container">
+              {Array.from(Array(10).keys()).map((i) => (
+                <div key={i} className="lines-notes"></div>
+              ))}
+               {/* <div className="grid-lines"></div> */}
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   );

@@ -457,3 +457,68 @@ body {
     size: letter; /* or 'letter' depending on your paper size */
     margin: .2in;
 }
+
+/* Add these new styles to your existing App.css */
+
+.schedule-group {
+  display: flex;
+  flex-direction: column;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.schedules {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notes-section {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.notes-textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+}
+
+@media print {
+  .app-container {
+    display: block;
+  }
+
+  .schedule-group {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 10px;
+  }
+
+  .schedules {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .container {
+    width: 30%;
+    height: 80vh;
+  }
+
+  .notes-section {
+    margin-top: 10px;
+    height: 15vh;
+  }
+
+  .notes-textarea {
+    border: 1px solid #000;
+    height: 10vh;
+  }
+
+  .lines-notes {
+    height: 1px;
+    background-color: #ebebeb;
+    min-height: 0px;
+    /* margin: auto; */
+    /* border-bottom: 1px solid #e8e8e8; */
+  }
+}
