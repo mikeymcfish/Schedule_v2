@@ -119,7 +119,7 @@ const DaySchedule = ({ date }) => {
 
   const getFullDate = (date) => {
     const formattedDate = date.toLocaleDateString("en-US", {
-      weekday: "long",
+      weekday: "short",
       month: "short",
       day: "numeric",
     });
@@ -264,13 +264,12 @@ const DaySchedule = ({ date }) => {
         </div>
       )}
       <div className="center-column">
-        
-        <div
+        {/* <div
           className="dynamic-time-line"
           style={{ display: showTimeLine ? "block" : "none", top: mouseY }}
         >
           <span className="time-display">{timeLineTime}</span>
-        </div>
+        </div> */}
         <div className="lines-container">
           {Array.from(Array(88).keys()).map((i) => (
             <div key={i} className="lines"></div>

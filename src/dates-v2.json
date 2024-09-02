@@ -2,8 +2,8 @@
   "DateScheduleWeek": [
     {
       "date": "2024-09-01",
-      "day": "B",
-      "color": "Gold",
+      "day": "",
+      "color": "",
       "note": "no school"
     },
     {
@@ -1175,6 +1175,12 @@
       "day": "F",
       "color": "Gold",
       "note": "Early dismissal"
+    },
+    {
+      "date": "2025-06-01",
+      "day": "",
+      "color": "",
+      "note": "no school"
     }
   ]
 }

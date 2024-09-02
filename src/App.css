@@ -6,10 +6,10 @@ body {
 
 .container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: grid;
-  grid-template-columns: 0.3fr 2.4fr 0.3fr;
-  grid-template-rows: 1fr 14fr;
+  grid-template-columns: 0.3fr 2.2fr 0.3fr;
+  grid-template-rows: 1fr 20fr;
   gap: 0px 0px;
   grid-auto-flow: row dense;
   grid-template-areas:
@@ -17,11 +17,11 @@ body {
     "Left center Right";
   position: relative;
   flex: 0 0 auto;
-  width: 200px;
+  width: auto;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  margin: 7px;
+  margin: 8px;
 }
 
 .UpperSchool {
@@ -68,12 +68,12 @@ body {
   position: relative;
 }
 
-html, body, .container {
-  height: 700px;
-}
+/* html, body, .container {
+  height: 30%;
+} */
 
 .container * {
-  position: relative;
+  /* position: relative; */
 }
 
 .break, .flex, .lunch, .sports, .advisory {
@@ -235,19 +235,6 @@ html, body, .container {
   display: block;
 }
 
-.column {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  line-height: 40px;
-  color: black;
-  padding: 5px;
-}
-
 .letterDay {
   /* flex: 2fr;
   font-size: 40px;
@@ -262,6 +249,9 @@ html, body, .container {
 
 .fullDate {
   flex: 3fr;
+  font-size: 20px;
+  /* text-align: left; */
+  font-weight: normal;
 }
 
 .navy-background {
@@ -340,7 +330,7 @@ html, body, .container {
   overflow-x: auto;
   width: 100%;
   /* padding: 20px; */
-  gap: 5px;
+  gap: 0px;
 }
 
 .letterDay {
@@ -352,7 +342,7 @@ html, body, .container {
   height: 100%;
 }
 
-.grid-lines {
+/* .grid-lines {
   position: absolute;
   top: 0;
   left: 0;
@@ -386,32 +376,37 @@ html, body, .container {
 
   );
   pointer-events: none;
-}
+} */
 
 .lines-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
-  top: -1px;
+  top: 0px;
   margin: 0;
 }
 
 .lines {
+  height: 1px;
+  background-color: #ebebeb;
   min-height: 0px;
-  border-bottom: 1px solid #e8e8e8;
+  /* margin: auto; */
+  /* border-bottom: 1px solid #e8e8e8; */
 }
 
 .lines:nth-of-type(6n+1) {
-  border-bottom: 1px solid #b8b8b8;
+  background-color: #bababa;
+  /* border-bottom: 1px solid #b8b8b8; */
 }
 
-.lines:nth-of-type(12n+1) {
-  border-bottom: 1px solid #1a1a1a;
+.lines:nth-of-type(12n+1) {  
+  background-color: black;
+  /* border-bottom: 1px solid #1a1a1a; */
 }
-
+/* 
 @media (max-width: 768px) {
   .app-container {
     flex-direction: column;
@@ -421,9 +416,9 @@ html, body, .container {
   .container {
     width: 90%;
     max-width: 300px;
-    height: 100vh;
+    height: 100%;
   }
-}
+} */
 
 @media print {
   .app-container {
@@ -432,15 +427,16 @@ html, body, .container {
     page-break-inside: avoid;
     break-inside: avoid;
     overflow: visible !important;
-    height: 100vh;
     margin: 0;
     padding: 0;
-    margin-left: 10vw;
+    margin-left: 18vw;
     margin-right: 2vw;
-    width: 88vw;
+    margin-bottom: 5px;
+    width: 80vw;
   }
 
-  .container {
+  .container, .body {
+    top: 0;
     height: 95vh;
     page-break-inside: avoid;
   }
@@ -449,5 +445,5 @@ html, body, .container {
 
 @page {
     size: letter; /* or 'letter' depending on your paper size */
-    margin: 0;
+    margin: .2in;
 }
