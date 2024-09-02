@@ -27,7 +27,7 @@ body {
 .UpperSchool {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 5fr 65fr 5fr 65fr 25fr 5fr 65fr 50fr 80fr 5fr 65fr;
+  grid-template-rows: 5fr 65fr 5fr 65fr 25fr 5fr 65fr 55fr 80fr 5fr 65fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-area: Left;

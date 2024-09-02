@@ -20,6 +20,7 @@ const DaySchedule = ({ date }) => {
     { className: "flex", color: "none" },
     { className: "break", color: "none" },
     { className: "p3", color: "green" },
+    
     { className: "lunch", color: "none" },
     { className: "p4", color: "red" },
     { className: "break", color: "none" },

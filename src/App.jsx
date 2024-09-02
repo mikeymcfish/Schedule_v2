@@ -6,7 +6,7 @@ const App = () => {
   const datesToDisplay = [];
   const startDate = new Date('2024-09-02T00:00:00');
   // 195 is full
-  for (let i = 0; datesToDisplay.length < 9; i++) {
+  for (let i = 0; datesToDisplay.length < 195; i++) {
     const tempDate = new Date(startDate);
     tempDate.setDate(startDate.getDate() + i);
     const day = tempDate.getDay();
