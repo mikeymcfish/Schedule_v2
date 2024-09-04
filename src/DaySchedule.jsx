@@ -157,13 +157,12 @@ const DaySchedule = ({ date }) => {
                 (scheduleEntry) => scheduleEntry.Period === block.className,
               );
               if (entry) {
-                return { ...block, color: getColorFromCode(entry.Class) };
+                return { ...block, color: getColorFromCode(entry.Class), letter: entry.Class.charAt(0) };
               }
               return block;
             }),
           );
         }
-
         // Set MS schedule
         const MSschedule = colors.SchoolWeek.find(
           (day) => day.Day === todayDay && day.Type === "MS",
@@ -175,7 +174,7 @@ const DaySchedule = ({ date }) => {
                 (scheduleEntry) => scheduleEntry.Period === block.className,
               );
               if (entry) {
-                return { ...block, color: getColorFromCode(entry.Class) };
+                return { ...block, color: getColorFromCode(entry.Class), letter: entry.Class.charAt(0) };
               }
               return block;
             }),
@@ -248,7 +247,7 @@ const DaySchedule = ({ date }) => {
             key={index}
             className={block.className}
             color-block={block.color}
-          ></div>
+          ><div className="letterDisplay" style={{ color: block.letter === 'Y' || block.letter === 'P' ? 'black' : 'white' }}>{block.letter}</div></div>
         ))}
       </div>
       {isNoSchool ? (
@@ -284,7 +283,7 @@ const DaySchedule = ({ date }) => {
             key={index}
             className={block.className}
             color-block={block.color}
-          ></div>
+          ><div className="letterDisplay" style={{ color: block.letter === 'Y' || block.letter === 'P' ? 'black' : 'white' }}>{block.letter}</div></div>
         ))}
       </div>
     </div>
