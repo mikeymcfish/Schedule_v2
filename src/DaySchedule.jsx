@@ -3,9 +3,7 @@ import dates from "./dates-v2.json";
 import colors from "./colors.json";
 
 const DaySchedule = ({ date }) => {
-  const [mouseY, setMouseY] = useState(0);
-  const [showTimeLine, setShowTimeLine] = useState(false);
-  const [timeLineTime, setTimeLineTime] = useState("");
+
   const [timeLinePosition, setTimeLinePosition] = useState(0);
   const [currentTime, setCurrentTime] = useState("");
   const [letterDay, setLetterDay] = useState("");
@@ -44,55 +42,6 @@ const DaySchedule = ({ date }) => {
     { className: "p6", color: "tan" },
     { className: "sports", color: "none" },
   ]);
-
-  useEffect(() => {
-    const centerColumn = document.querySelector(".center-column");
-
-    const handleMouseMove = (e) => {
-      const rect = centerColumn.getBoundingClientRect();
-      const y = e.clientY - rect.top;
-      setMouseY(y);
-      updateTime(y, rect.height);
-    };
-
-    const handleMouseEnter = () => setShowTimeLine(false); //disabled. set TRUE to enable
-    const handleMouseLeave = () => setShowTimeLine(false);
-
-    const updateTime = (y, height) => {
-      const startTime = new Date();
-      startTime.setHours(8, 0, 0, 0);
-      const endTime = new Date();
-      endTime.setHours(15, 30, 0, 0);
-
-      const totalMinutes = (endTime - startTime) / 60000;
-      const currentMinutes = (y / height) * totalMinutes;
-
-      const currentDateTime = new Date(
-        startTime.getTime() + currentMinutes * 60000,
-      );
-      setTimeLineTime(
-        currentDateTime.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      );
-    };
-
-    centerColumn.addEventListener("mousemove", handleMouseMove);
-    centerColumn.addEventListener("mouseenter", handleMouseEnter);
-    centerColumn.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      centerColumn.removeEventListener("mousemove", handleMouseMove);
-      centerColumn.removeEventListener("mouseenter", handleMouseEnter);
-      centerColumn.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  const getTodayDate = () => {
-    const today = new Date();
-    return today.toISOString().split("T")[0];
-  };
 
   const getColorFromCode = (code) => {
     const firstLetter = code.charAt(0).toLowerCase();
@@ -264,15 +213,13 @@ const DaySchedule = ({ date }) => {
         </div>
       )}
       <div className="center-column">
-        {/* <div
-          className="dynamic-time-line"
-          style={{ display: showTimeLine ? "block" : "none", top: mouseY }}
-        >
-          <span className="time-display">{timeLineTime}</span>
-        </div> */}
+
         <div className="lines-container">
           {Array.from(Array(88).keys()).map((i) => (
-            <div key={i} className="lines"></div>
+            <>
+              <div key={`L-${i}`} className="lines"></div>
+
+            </>
           ))}
            {/* <div className="grid-lines"></div> */}
         </div>

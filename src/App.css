@@ -410,20 +410,22 @@ body {
 
 .lines {
   height: 1px;
-  background-color: #ebebeb;
+  background-color: #dbdbdb;
   min-height: 0px;
+  /* width: 10%; */
+  
   /* margin: auto; */
-  /* border-bottom: 1px solid #e8e8e8; */
-}
+  /* border-bottom: 5px dotted #e8e8e8; */
+}`
 
 .lines:nth-of-type(6n+1) {
-  background-color: #bababa;
-  /* border-bottom: 1px solid #b8b8b8; */
+  /* width: 20%; */
+  border-bottom: 1px solid #b8b8b8;
 }
 
 .lines:nth-of-type(12n+1) {  
-  background-color: black;
-  /* border-bottom: 1px solid #1a1a1a; */
+  /* width: 30%; */
+  border-bottom: 1px solid #b8b8b8;
 }
 
 .lines:first-of-type, .lines:last-of-type {
@@ -502,6 +504,7 @@ body {
   flex-direction: column;
   page-break-inside: avoid;
   break-inside: avoid;
+  
 }
 
 .schedules {
@@ -520,9 +523,37 @@ body {
   resize: vertical;
 }
 
-
+@media screen {
+  .app-container {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .screen-view {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: max-content;
+  }
+  .screen-view .container {
+    width: 300px; /* Adjust as needed */
+    margin-right: 10px;
+  }
+  .print-view {
+    display: none;
+  }
+}
 
 @media print {
+
+  .screen-view {
+    display: none;
+  }
+  .print-view {
+    display: block;
+  }
+  
   .app-container {
     display: block;
   }
