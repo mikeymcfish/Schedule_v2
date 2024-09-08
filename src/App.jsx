@@ -1,6 +1,8 @@
 import React from "react";
 import DaySchedule from "./DaySchedule.jsx";
 import "./App.css";
+import customEvents from './customEvents.json';  // Import your custom events JSON
+
 
 const App = () => {
   // Function to get today and next 5 weekdays
@@ -20,7 +22,8 @@ const App = () => {
   // Original date generation logic for print view
   const datesToDisplay = [];
   const startDate = new Date('2024-09-02T00:00:00');
-  for (let i = 0; datesToDisplay.length < 195; i++) {
+  // 195 total
+  for (let i = 0; datesToDisplay.length < 9; i++) {
     const tempDate = new Date(startDate);
     tempDate.setDate(startDate.getDate() + i);
     const day = tempDate.getDay();
@@ -42,7 +45,7 @@ const App = () => {
       {/* Screen view */}
       <div className="schedule-group screen-view">
         {screenViewDates.map((date) => (
-          <DaySchedule key={date} date={date} />
+          <DaySchedule key={`schedule-${date}`} date={date} customEvents={customEvents} />
         ))}
       </div>
 
@@ -52,7 +55,7 @@ const App = () => {
           <div key={index} className="schedule-group">
             <div className="schedules">
               {group.map((date) => (
-                <DaySchedule key={date} date={date} />
+                <DaySchedule key={`schedule-${date}`} date={date} customEvents={customEvents} />
               ))}
             </div>
             <div className="notes-section">

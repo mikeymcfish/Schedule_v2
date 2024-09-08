@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import dates from "./dates-v2.json";
 import colors from "./colors.json";
 
-const DaySchedule = ({ date }) => {
-
+const DaySchedule = ({ date, customEvents }) => {
   const [timeLinePosition, setTimeLinePosition] = useState(0);
   const [currentTime, setCurrentTime] = useState("");
   const [letterDay, setLetterDay] = useState("");
@@ -18,7 +17,6 @@ const DaySchedule = ({ date }) => {
     { className: "flex", color: "none" },
     { className: "break", color: "none" },
     { className: "p3", color: "green" },
-    
     { className: "lunch", color: "none" },
     { className: "p4", color: "red" },
     { className: "break", color: "none" },
@@ -80,6 +78,7 @@ const DaySchedule = ({ date }) => {
     const formattedDate = new Date(date + "T00:00:00")
       .toISOString()
       .split("T")[0];
+
     const todaySchedule = dates.DateScheduleWeek.find(
       (entry) => entry.date === formattedDate,
     );
@@ -106,7 +105,11 @@ const DaySchedule = ({ date }) => {
                 (scheduleEntry) => scheduleEntry.Period === block.className,
               );
               if (entry) {
-                return { ...block, color: getColorFromCode(entry.Class), letter: entry.Class.charAt(0) };
+                return {
+                  ...block,
+                  color: getColorFromCode(entry.Class),
+                  letter: entry.Class.charAt(0),
+                };
               }
               return block;
             }),
@@ -123,14 +126,17 @@ const DaySchedule = ({ date }) => {
                 (scheduleEntry) => scheduleEntry.Period === block.className,
               );
               if (entry) {
-                return { ...block, color: getColorFromCode(entry.Class), letter: entry.Class.charAt(0) };
+                return {
+                  ...block,
+                  color: getColorFromCode(entry.Class),
+                  letter: entry.Class.charAt(0),
+                };
               }
               return block;
             }),
           );
         }
-      }
-      else {
+      } else {
         setWeekColor("none");
         setBlocksUS((prevBlocks) =>
           prevBlocks.map((block) => ({ ...block, color: "none" })),
@@ -183,6 +189,62 @@ const DaySchedule = ({ date }) => {
     return () => clearInterval(interval);
   }, []);
 
+  const [processedEvents, setProcessedEvents] = useState([]);
+  useEffect(() => {
+      console.log('Current date prop:', date);
+      console.log('All custom events:', customEvents);
+
+      if (Array.isArray(customEvents)) {
+        const filteredEvents = customEvents.filter(event => event.date === date);
+        console.log('Filtered events for this date:', filteredEvents);
+
+        const processed = filteredEvents.map(event => ({
+          ...event,
+          style: calculateEventStyle(event)
+        }));
+        setProcessedEvents(processed);
+      } else {
+        console.warn('customEvents is not an array:', customEvents);
+        setProcessedEvents([]);
+      }
+    }, [date, customEvents]);
+
+  const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':');
+    const date = new Date(2000, 0, 1, hours, minutes);
+    return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  };
+
+  const calculateEventStyle = (event) => {
+    const startTime = new Date(`${date}T${event.startTime}`);
+    const endTime = new Date(startTime.getTime() + event.duration * 60000);
+
+    const dayStart = new Date(`${date}T08:00:00`);
+    const dayEnd = new Date(`${date}T15:20:00`);
+    const totalMinutes = (dayEnd - dayStart) / 60000;
+
+    const startPercent = ((startTime - dayStart) / 60000) / totalMinutes * 100;
+    const heightPercent = (event.duration / totalMinutes) * 100;
+
+    return {
+      top: `${startPercent}%`,
+      height: `${heightPercent}%`,
+      backgroundColor: event.color || '#cccccc',
+      position: 'absolute',
+      width: '100%',
+      left: 0,
+      overflow: 'hidden',
+      padding: '2px',
+      boxSizing: 'border-box',
+      fontSize: '0.8em',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+    };
+  };
+
   return (
     <div className="container">
       {timeLinePosition >= 0 && (
@@ -191,13 +253,26 @@ const DaySchedule = ({ date }) => {
         </div>
       )}
       <div className="UpperSchool">
-        {!isNoSchool && blocksUS.map((block, index) => (
-          <div
-            key={index}
-            className={block.className}
-            color-block={block.color}
-          ><div className="letterDisplay" style={{ color: block.letter === 'Y' || block.letter === 'P' ? 'black' : 'white' }}>{block.letter}</div></div>
-        ))}
+        {!isNoSchool &&
+          blocksUS.map((block, index) => (
+            <div
+              key={`${date}-us-${block.className}-${index}`}
+              className={block.className}
+              color-block={block.color}
+            >
+              <div
+                className="letterDisplay"
+                style={{
+                  color:
+                    block.letter === "Y" || block.letter === "P"
+                      ? "black"
+                      : "white",
+                }}
+              >
+                {block.letter}
+              </div>
+            </div>
+          ))}
       </div>
       {isNoSchool ? (
         <div id="title" className="Title gray-background">
@@ -213,28 +288,71 @@ const DaySchedule = ({ date }) => {
         </div>
       )}
       <div className="center-column">
-
         <div className="lines-container">
           {Array.from(Array(88).keys()).map((i) => (
-            <>
-              <div key={`L-${i}`} className="lines"></div>
-
-            </>
+            <div key={`${date}-line-${i}`} className="lines"></div>
           ))}
-           {/* <div className="grid-lines"></div> */}
+          {/* <div className="grid-lines"></div> */}
+        </div>
+        <div className="custom-events-container" style={{ 
+          position: 'absolute', 
+          top: 0,
+          left: 0,
+          width: '100%', 
+          height: '100%', 
+          pointerEvents: 'none'
+        }}>
+          {
+            processedEvents.map((event, index) => {
+              const startTimeFormatted = formatTime(event.startTime);
+              const endTime = new Date(new Date(`${date}T${event.startTime}`).getTime() + event.duration * 60000);
+              const endTimeFormatted = formatTime(endTime.toTimeString().slice(0, 5));
+
+              return (
+                <div 
+                  key={`${date}-event-${event.title}-${index}`} 
+                  style={{
+                    ...event.style,
+                    zIndex: 10,
+                    pointerEvents: 'auto'
+                  }}
+                >
+                  <div>{event.title}</div>
+                  <div>{startTimeFormatted} - {endTimeFormatted}</div>
+                </div>
+              );
+            })
+          }
         </div>
       </div>
       <div className="MiddleSchool">
-        {!isNoSchool && blocksMS.map((block, index) => (
-          <div
-            key={index}
-            className={block.className}
-            color-block={block.color}
-          ><div className="letterDisplay" style={{ color: block.letter === 'Y' || block.letter === 'P' ? 'black' : 'white' }}>{block.letter}</div></div>
-        ))}
+        {!isNoSchool &&
+          blocksMS.map((block, index) => (
+            <div
+              key={`${date}-ms-${block.className}-${index}`}
+              className={block.className}
+              color-block={block.color}
+            >
+              <div
+                className="letterDisplay"
+                style={{
+                  color:
+                    block.letter === "Y" || block.letter === "P"
+                      ? "black"
+                      : "white",
+                }}
+              >
+                {block.letter}
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
+};
+
+DaySchedule.defaultProps = {
+  customEvents: [],
 };
 
 export default DaySchedule;
