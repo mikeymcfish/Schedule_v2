@@ -1,0 +1,144 @@
+{
+  "UpperSchool": [
+    {
+      "className": "advisory",
+      "startTime": "08:00",
+      "duration": 5
+    },
+    {
+      "className": "p1",
+      "startTime": "08:05",
+      "duration": 65
+    },
+    {
+      "className": "break",
+      "startTime": "09:10",
+      "duration": 5
+    },
+    {
+      "className": "p2",
+      "startTime": "09:15",
+      "duration": 65
+    },
+    {
+      "className": "flex",
+      "startTime": "10:20",
+      "duration": 25
+    },
+    {
+      "className": "break",
+      "startTime": "10:45",
+      "duration": 5
+    },
+    {
+      "className": "p3",
+      "startTime": "10:50",
+      "duration": 65
+    },
+    {
+      "className": "lunch",
+      "startTime": "11:55",
+      "duration": 55
+    },
+    {
+      "className": "p4",
+      "startTime": "12:50",
+      "duration": 80
+    },
+    {
+      "className": "break",
+      "startTime": "14:10",
+      "duration": 5
+    },
+    {
+      "className": "p5",
+      "startTime": "14:15",
+      "duration": 65
+    }
+  ],
+
+  "MiddleSchool": [
+    {
+      "className": "advisory",
+      "startTime": "08:00",
+      "duration": 10
+    },
+    {
+      "className": "p1",
+      "startTime": "08:10",
+      "duration": 45
+    },
+    {
+      "className": "break",
+      "startTime": "08:55",
+      "duration": 5
+    },
+    {
+      "className": "p2",
+      "startTime": "09:00",
+      "duration": 45
+    },
+    {
+      "className": "break",
+      "startTime": "09:45",
+      "duration": 5
+    },
+    {
+      "className": "flex",
+      "startTime": "09:50",
+      "duration": 25
+    },
+    {
+      "className": "break",
+      "startTime": "10:15",
+      "duration": 5
+    },
+    {
+      "className": "p3",
+      "startTime": "10:20",
+      "duration": 45
+    },
+    {
+      "className": "lunch",
+      "startTime": "11:05",
+      "duration": 45
+    },
+    {
+      "className": "break",
+      "startTime": "11:50",
+      "duration": 5
+    },
+    {
+      "className": "p4",
+      "startTime": "11:55",
+      "duration": 45
+    },
+    {
+      "className": "break",
+      "startTime": "12:40",
+      "duration": 5
+    },
+    {
+      "className": "p5",
+      "startTime": "12:45",
+      "duration": 45
+    },
+    {
+      "className": "break",
+      "startTime": "13:30",
+      "duration": 5
+    },
+    {
+      "className": "p6",
+      "startTime": "13:35",
+      "duration": 45
+    },
+    {
+      "className": "sports",
+      "startTime": "14:20",
+      "duration": 60
+    }
+  ],
+
+  "endTime": "15:20"
+}
