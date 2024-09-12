@@ -1,10 +1,12 @@
 import React from "react";
 import DaySchedule from "./DaySchedule.jsx";
 import "./App.css";
-import customEvents from './customEvents.json';  // Import your custom events JSON
+import customEvents from './customEvents.json'; 
 
 
 const App = () => {
+
+  
   // Function to get today and next 5 weekdays
   const getTodayAndNext5Days = () => {
     const dates = [];

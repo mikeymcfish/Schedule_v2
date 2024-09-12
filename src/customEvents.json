@@ -1,16 +1,16 @@
 [
-  {
-    "date": "2024-09-09",
-    "startTime": "09:15",
-    "duration": 65,
-    "title": "Class",
-    "color": "#ffffff"
-  },
-  {
-    "date": "2024-09-10",
-    "startTime": "08:05",
-    "duration": 65,
-    "title": "Special Assembly",
-    "color": "#ffffff"
-  }
+    {
+        "date": "2024-09-12",
+        "startTime": "11:23",
+        "duration": 37,
+        "title": "Test 1",
+        "color": "#ffffff"
+    },
+    {
+        "date": "2024-09-13",
+        "startTime": "09:20",
+        "duration": 45,
+        "title": "A thing",
+        "color": "#ffffff"
+    }
 ]

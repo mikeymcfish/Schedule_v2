@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "repl-nix-schedule-v2"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+google-api-python-client = "^2.145.0"
+google-auth = "^2.34.0"
+python-dateutil = "^2.9.0.post0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
